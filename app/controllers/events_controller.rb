@@ -11,8 +11,12 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(params_event)
-    @event.save
-    redirect_to :action => :show, :id => @event
+    if @event.save
+      flash[:notice]="新增成功"
+      redirect_to :action => :show, :id => @event
+    else
+      render :action => :new
+    end
   end
 
   def show
@@ -23,14 +27,17 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event.update(params_event)
-
-    redirect_to :action => :show, :id => @event
+    if @event.update(params_event)
+      flash[:notice]="更新成功"
+      redirect_to :action => :show, :id => @event
+    else
+      render :action => :edit
+    end
   end
 
   def destroy
     @event.destroy
-
+    flash[:notice]="刪除成功"
     redirect_to :action => :index
   end
 
@@ -40,6 +47,6 @@ class EventsController < ApplicationController
   end
 
   def params_event
-    params.require(:event).permit(:name, :description , :capacity)
+    params.require(:event).permit(:name, :description, :capacity)
   end
 end

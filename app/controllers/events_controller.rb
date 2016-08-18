@@ -16,6 +16,23 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+  end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @event.update(params.require(:event).permit(:name , :description))
+
+    redirect_to :action => :show , :id => @event
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+
+    redirect_to :action => :index
   end
 end

@@ -3,6 +3,10 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.page(params[:page]).per(25)
+    respond_to do |format|
+      format.html
+      format.json { render :json => @events.to_json }
+    end
   end
 
   def new
@@ -21,6 +25,11 @@ class EventsController < ApplicationController
 
   def show
     @page_title = @event.name
+    respond_to do |format|
+      format.html
+      format.json { render :json => { :name => @event.name, :description => @event.description, :creaet_time => @event.created_at }.to_json }
+
+    end
   end
 
   def edit

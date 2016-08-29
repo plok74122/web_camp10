@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'events#index'
   get 'articles/show/:id' , :to => 'articles#show'
   post 'articles/create' , :to => 'articles#create'
-  post 'articles/update' , :to => 'articles#update'
-  post 'articles/delete' , :to => 'articles#delete'
+  post 'articles/update/:id' , :to => 'articles#update'
+  post 'articles/destroy/:id' , :to => 'articles#destroy'
   resources :events
 end

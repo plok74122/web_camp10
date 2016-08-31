@@ -1,5 +1,10 @@
 class ArticlesController < ApplicationController
-  before_action :set_article , :except => :create
+  before_action :set_article, :except => [:index, :create]
+
+  def index
+    @articles = Article.all
+    render :json => @articles.to_json
+  end
 
   def show
     @article = Article.find(params[:id])
@@ -31,7 +36,7 @@ class ArticlesController < ApplicationController
 
   protected
   def article_params
-    params.permit(:title,:content)
+    params.permit(:title, :content)
   end
 
   def set_article

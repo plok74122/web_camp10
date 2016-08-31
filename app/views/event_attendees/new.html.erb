@@ -1,0 +1,14 @@
+<div class="form-group">
+  <%= form_for @attendee, :url => event_attendees_path(@event) do |f| %>
+      <% if @attendee.errors.any? %>
+          <ul>
+            <% @attendee.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+      <% end %>
+      <%= f.label :name %>
+      <%= f.text_field :name, :class => "form-control" %>
+      <%= f.submit :class => "btn btn-success" %>
+  <% end %>
+</div>

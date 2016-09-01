@@ -5,4 +5,5 @@ class Event < ApplicationRecord
   has_one :location, :class_name => "Location", :foreign_key => "event_id"
   has_many :event_groupships, :class_name => "EventGroupship", :foreign_key => "event_id"
   has_many :groups, :through => :event_groupships
+  delegate :name , :to => :category , :prefix => true , :allow_nil => true
 end

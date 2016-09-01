@@ -1,21 +1,27 @@
 <h1>Event List</h1>
 <table class="table table-striped">
   <tr>
-    <th>名稱</th>
+    <th>名稱(地點)</th>
     <th>參加人員</th>
+    <th>location</th>
     <th>show</th>
     <th>edit</th>
     <th>destroy</th>
   </tr>
   <% @events.each do |event| %>
-    <tr>
-      <td><%= event.name %></td>
-      <td><%= link_to 'attendees', event_attendees_path(event) %></td>
-      <td><%= link_to "show" , event_path(event) %></td>
-      <td><%= link_to "edit" , edit_event_path(event) %></td>
-      <td><%= button_to "destroy" , event_path(event) ,:method => :delete %></td>
-    </tr>
+      <tr>
+        <td><%= event.name %>(<%= event.location_name %>)</td>
+        <td><%= link_to 'attendees', event_attendees_path(event) %></td>
+        <% if event.location_name.present? %>
+            <td><%= link_to 'edit location', edit_event_locations_path(event) %></td>
+        <% else %>
+            <td><%= link_to 'new location', new_event_locations_path(event) %></td>
+        <% end %>
+        <td><%= link_to "show", event_path(event) %></td>
+        <td><%= link_to "edit", edit_event_path(event) %></td>
+        <td><%= button_to "destroy", event_path(event), :method => :delete %></td>
+      </tr>
   <% end %>
 </table>
 <%= paginate @events %>
-<%= link_to "new event" , new_event_path %>
+<%= link_to "new event", new_event_path %>

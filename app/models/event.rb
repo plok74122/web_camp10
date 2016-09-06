@@ -7,4 +7,5 @@ class Event < ApplicationRecord
   has_many :groups, :through => :event_groupships
   delegate :name , :to => :category , :prefix => true , :allow_nil => true
   delegate :name , :to => :location , :prefix => true , :allow_nil => true
+  delegate :id , :to => :location , :prefix => true , :allow_nil => true
 end

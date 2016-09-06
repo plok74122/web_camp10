@@ -12,8 +12,8 @@
       <tr>
         <td><%= event.name %>(<%= event.location_name %>)</td>
         <td><%= link_to 'attendees', event_attendees_path(event) %></td>
-        <% if event.location_name.present? %>
-            <td><%= link_to 'edit location', edit_event_locations_path(event) %></td>
+        <% if event.location_id.present? %>
+            <td><%= link_to event.location_name , event_locations_path(event) %></td>
         <% else %>
             <td><%= link_to 'new location', new_event_locations_path(event) %></td>
         <% end %>

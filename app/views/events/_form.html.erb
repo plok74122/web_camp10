@@ -13,4 +13,5 @@
 <%= f.text_field :capacity %>
 <%= f.label :category_id %>
 <%= f.select :category_id, Category.all.map { |c| [c.name, c.id] }, :include_blank => true %>
+<%= f.collection_check_boxes(:group_ids , Group.all , :id , :name) %>
 <%= f.submit %>
